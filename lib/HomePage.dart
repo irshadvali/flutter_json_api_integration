@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             new UserAccountsDrawerHeader(
               accountName: new Text("Irshad Vali"),
-              accountEmail: new Text("irshad.vali@gmail.com"),
+              accountEmail: new Text("abc@gmail.com"),
               decoration: new BoxDecoration(color: Colors.deepOrange),
             ),
             new ListTile(
