@@ -159,6 +159,77 @@ class _HomeState extends State<Home> {
               },
             ),
           ), // end of first container
+
+          new SizedBox(height: 7.0),
+          // Second Container Start
+          new Container(
+            margin: EdgeInsets.all(10.0),
+            height: MediaQuery.of(context).size.height,
+            child: new FutureBuilder(
+                future: getAllData(),
+                builder: (BuildContext c, AsyncSnapshot snapshot){
+                  if (snapshot.data == null) {
+                    return Center(
+                      child: new Text("Loading Data"),
+                    );
+                  }
+                  else{
+                    return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext c, int index){
+                          MaterialColor mColor=_color[index % _color.length];
+                          return Card(
+                            elevation: 7.0,
+                            child: new Container(
+                              height: 80.0,
+                              child: new Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+
+                                  new Expanded(
+
+                                      flex: 1,
+                                      child: new Image.network(snapshot.data[index].thumbnailUrl,
+                                        height: 100.0,
+                                        fit: BoxFit.cover,
+                                      )
+                                  ),
+
+                                  new SizedBox(width: 7.0),
+                                  new Expanded(
+                                      flex: 2,
+                                      child: new Text(snapshot.data[index].title,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),)
+                                  ),
+
+
+                                  new Expanded(
+                                      flex: 1,
+                                      child: CircleAvatar(
+                                        child: new Text(
+                                          snapshot.data[index].id.toString(),
+                                        ),
+                                        backgroundColor:mColor ,
+                                        foregroundColor: Colors.white,
+                                      )),
+
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }
+
+
+
+            }
+
+            ),
+
+          ),// Second Container end
         ],
       ),
     );
